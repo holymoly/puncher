@@ -11,21 +11,21 @@ block  modal
         .modal-body
           form(action='/newTask', method='post')
             label(for='task') Task
-            input.form-control(type='text', name='task')
+            input.form-control(type='text', name='task',required)
             br
             label(for='description') Description
-            textarea.form-control(type='text', name='description')
+            textarea.form-control(type='text', name='description', required)
             br
             label(for='deadline') Deadline
             .row(name='deadline')
               .col-sm-4.col-sm-offset-2
-                input.form-control(type='date', name='deadlineDate')
+                input.form-control(type='date', name='deadlineDate', required)
               .col-sm-4
-                input.form-control(type='time', name='deadlineTime')
+                input.form-control(type='time', name='deadlineTime', required)
             br
             label(for='user') Assign User
             select.form-control(name='user')
-              option(value='one') One
+              option(selected disabled hidden value='' ) Select User
               option(value='two') Two
               option(value='three') Three
               option(value='four') Four
@@ -33,7 +33,7 @@ block  modal
             br
             label(for='project') Project
             select.form-control(name='project')
-              option(value='one') One
+              option(selected disabled hidden value='' ) Select Project
               option(value='two') Two
               option(value='three') Three
               option(value='four') Four
@@ -41,13 +41,13 @@ block  modal
             br
             label(for='unit') Unit
             select.form-control(name='unit')
-              option(value='one') One
+              option(selected disabled hidden value='' ) Select Unit
               option(value='two') Two
               option(value='three') Three
               option(value='four') Four
               option(value='five') Five
             label(for='estimated') estimated Hours
-            input.form-control(type='number', name='estimated')
+            input.form-control(type='number', name='estimated', required)
             label(for='spent') spented Hours
             input.form-control(type='number', name='spent')
             br
@@ -70,6 +70,7 @@ block  modal
             br
             label(for='short') Short
             input.form-control(type='text', name='short')
+            br
             button.btn.btn-primary(type='submit', value='newUser') Submit
         .modal-footer.well
   #newProject.modal.fade(tabindex='-1', role='dialog', aria-labelledby='myModalLabel', aria-hidden='true')
@@ -86,6 +87,7 @@ block  modal
             br
             label(for='customer') Customer
             input.form-control(type='text', name='customer')
+            br
             button.btn.btn-primary(type='submit', value='newProject') Submit
         .modal-footer.well
   #newUnit.modal.fade(tabindex='-1', role='dialog', aria-labelledby='myModalLabel', aria-hidden='true')
@@ -96,10 +98,15 @@ block  modal
             span(aria-hidden='true') &times;
           h4#myModalLabel.modal-title New Unit
         .modal-body
-          | ...
+          form(action='/newUnit', method='post')
+            label(for='unitName') Unit Name
+            input.form-control(type='text', name='unitName')
+            br
+            label(for='projectName') Part of Project
+            input.form-control(type='text', name='projectName')
+            br
+            button.btn.btn-primary(type='submit', value='newUnit') Submit
         .modal-footer.well
-          button.btn.btn-default(type='button', data-dismiss='modal') Close
-          button.btn.btn-primary(type='button') Save changes
   #Task.modal.fade(tabindex='-1', role='dialog', aria-labelledby='myModalLabel', aria-hidden='true')
     .modal-dialog
       .modal-content
