@@ -1,0 +1,165 @@
+extends modal
+block content
+  // Main
+  .container-fluid
+    .row
+      .col-sm-2
+        // Left column
+        ul.nav.nav-stacked
+          li.nav-header
+            a(href='#', data-toggle='collapse', data-target='#userMenu')
+              | Projects
+              i.glyphicon.glyphicon-chevron-right
+            ul#userMenu.nav.nav-stacked.collapse
+              li
+                a(href='#')
+                  |  All
+          li.nav-header
+            a(href='#', data-toggle='collapse', data-target='#menu2')
+              | User
+              i.glyphicon.glyphicon-chevron-right
+            ul#menu2.nav.nav-stacked.collapse
+              li
+                a(href='#') MSL
+        hr
+        ul.nav.nav-pills.nav-stacked
+          li.nav-header
+          li
+            a(href='#open')
+              i.glyphicon.glyphicon-wrench
+              |  Open
+          li
+            a(href='#closed')
+              i.glyphicon.glyphicon-ok
+              |  Closed
+      .col-sm-10
+        .row
+          // center
+          .col-md-12
+            .btn-group.btn-group-justified
+              a.btn.btn-primary.col-sm-3(type='button', data-toggle='modal', data-target='#newTask')
+                i.glyphicon.glyphicon-plus
+                br
+                strong
+                big Task
+              a.btn.btn-primary.col-sm-3(type='button', data-toggle='modal', data-target='#newUser')
+                i.glyphicon.glyphicon-plus
+                br
+                strong
+                big User
+              a.btn.btn-primary.col-sm-3(type='button', data-toggle='modal', data-target='#newProject')
+                i.glyphicon.glyphicon-plus
+                br
+                strong
+                big Project
+              a.btn.btn-primary.col-sm-3(type='button', data-toggle='modal', data-target='#newUnit')
+                i.glyphicon.glyphicon-plus
+                br
+                strong
+                big Unit
+            a.anchor(name='open')
+            .panel.panel-default
+              .div-panel-heading
+                .div-head
+                  big OPEN
+                  hr
+                  .row
+                    .col-sm-2 Project
+                    .col-sm-2 Unit
+                    .col-sm-4 Task
+                    .col-sm-4 Assigned
+              .panel-body
+                .click(type='button', data-toggle='modal', data-target='#Task')
+                  .row
+                    .col-sm-2 Project
+                    .col-sm-2 Unit
+                    .col-sm-4 Task
+                    .col-sm-4 Assigned
+                  .progress
+                    span
+                    .progress-bar.progress-bar-warning(role='progressbar', aria-valuenow='72', aria-valuemin='0', aria-valuemax='100', style='width: 72%')
+                      span.sr-only 72% Complete
+                hr
+                .click(type='button', data-toggle='modal', data-target='#Task')
+                  .row
+                    .col-sm-2 Project
+                    .col-sm-2 Unit
+                    .col-sm-4 Task
+                    .col-sm-4 Assigned
+                  .progress
+                    .progress-bar.progress-bar-warning(role='progressbar', aria-valuenow='20', aria-valuemin='0', aria-valuemax='100', style='width: 20%')
+                      span.sr-only 20% Complete
+                hr
+                .click(type='button', data-toggle='modal', data-target='#Task')
+                  .row
+                    .col-sm-2 Project
+                    .col-sm-2 Unit
+                    .col-sm-4 Task
+                    .col-sm-4 Assigned
+                  .progress
+                    .progress-bar.progress-bar-warning(role='progressbar', aria-valuenow='60', aria-valuemin='0', aria-valuemax='100', style='width: 60%')
+                      span.sr-only 60% Complete (warning)
+                hr
+                .click(type='button', data-toggle='modal', data-target='#Task')
+                  .row
+                    .col-sm-2 Project
+                    .col-sm-2 Unit
+                    .col-sm-4 Task
+                    .col-sm-4 Assigned
+                  .progress
+                    .progress-bar.progress-bar-warning(role='progressbar', aria-valuenow='80', aria-valuemin='0', aria-valuemax='100', style='width: 80%')
+                      span.sr-only 80% Complete
+            a.anchor(name='closed')
+            .panel.panel-default
+              .div-panel-heading
+                .div-head
+                  big CLOSED
+                  hr
+                  .row
+                    .col-sm-2 Project
+                    .col-sm-2 Unit
+                    .col-sm-4 Task
+                    .col-sm-4 Assigned
+              .panel-body
+                .click(type='button', data-toggle='modal', data-target='#Task')
+                  .row
+                    .col-sm-2 Project
+                    .col-sm-2 Unit
+                    .col-sm-4 Task
+                    .col-sm-4 Assigned
+                  .progress
+                    .progress-bar.progress-bar-succes(role='progressbar', aria-valuenow='72', aria-valuemin='0', aria-valuemax='100', style='width: 72%')
+                      span.sr-only 72% Complete
+                hr
+                .click(type='button', data-toggle='modal', data-target='#Task')
+                  .row
+                    .col-sm-2 Project
+                    .col-sm-2 Unit
+                    .col-sm-4 Task
+                    .col-sm-4 Assigned
+                  .progress
+                    .progress-bar.progress-bar-succes(role='progressbar', aria-valuenow='20', aria-valuemin='0', aria-valuemax='100', style='width: 20%')
+                      span.sr-only 20% Complete
+                hr
+                .click(type='button', data-toggle='modal', data-target='#Task')
+                  .row
+                    .col-sm-2 Project
+                    .col-sm-2 Unit
+                    .col-sm-4 Task
+                    .col-sm-4 Assigned
+                  .progress
+                    .progress-bar.progress-bar-succes(role='progressbar', aria-valuenow='60', aria-valuemin='0', aria-valuemax='100', style='width: 60%')
+                      span.sr-only 60% Complete (warning)
+                hr
+                .click(type='button', data-toggle='modal', data-target='#Task')
+                  .row
+                    .col-sm-2 Project
+                    .col-sm-2 Unit
+                    .col-sm-4 Task
+                    .col-sm-4 Assigned
+                  .progress
+                    .progress-bar.progress-bar-succes(role='progressbar', aria-valuenow='80', aria-valuemin='0', aria-valuemax='100', style='width: 80%')
+                      span.sr-only 80% Complete
+  script(src='//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js')
+  script(src='javascripts/bootstrap.min.js')
+  script(src='javascripts/scripts.js')
