@@ -11,16 +11,18 @@ block content
               | Projects
               i.glyphicon.glyphicon-chevron-right
             ul#userMenu.nav.nav-stacked.collapse
-              li
-                a(href='#')
-                  |  All
+              each val in projectNames
+                li
+                  a(href='#')= val.value.projectName
+
           li.nav-header
             a(href='#', data-toggle='collapse', data-target='#menu2')
               | User
               i.glyphicon.glyphicon-chevron-right
             ul#menu2.nav.nav-stacked.collapse
-              li
-                a(href='#') MSL
+              each val in users
+                li
+                  a(href='#')= val.value.short
       .col-sm-10
         .row
           // center
@@ -58,46 +60,33 @@ block content
                     .col-sm-4 Task
                     .col-sm-4 Assigned
               .panel-body
-                .click(type='button', data-toggle='modal', data-target='#Task')
-                  .row
-                    .col-sm-2 Project
-                    .col-sm-2 Unit
-                    .col-sm-4 Task
-                    .col-sm-4 Assigned
-                  .progress
-                    span
-                    .progress-bar.progress-bar-warning(role='progressbar', aria-valuenow='72', aria-valuemin='0', aria-valuemax='100', style='width: 72%')
-                      span.sr-only 72% Complete
-                hr
-                .click(type='button', data-toggle='modal', data-target='#Task')
-                  .row
-                    .col-sm-2 Project
-                    .col-sm-2 Unit
-                    .col-sm-4 Task
-                    .col-sm-4 Assigned
-                  .progress
-                    .progress-bar.progress-bar-warning(role='progressbar', aria-valuenow='20', aria-valuemin='0', aria-valuemax='100', style='width: 20%')
-                      span.sr-only 20% Complete
-                hr
-                .click(type='button', data-toggle='modal', data-target='#Task')
-                  .row
-                    .col-sm-2 Project
-                    .col-sm-2 Unit
-                    .col-sm-4 Task
-                    .col-sm-4 Assigned
-                  .progress
-                    .progress-bar.progress-bar-warning(role='progressbar', aria-valuenow='60', aria-valuemin='0', aria-valuemax='100', style='width: 60%')
-                      span.sr-only 60% Complete (warning)
-                hr
-                .click(type='button', data-toggle='modal', data-target='#Task')
-                  .row
-                    .col-sm-2 Project
-                    .col-sm-2 Unit
-                    .col-sm-4 Task
-                    .col-sm-4 Assigned
-                  .progress
-                    .progress-bar.progress-bar-warning(role='progressbar', aria-valuenow='80', aria-valuemin='0', aria-valuemax='100', style='width: 80%')
-                      span.sr-only 80% Complete
+                each val in tasks
+                  .click(type='button',
+                         data-toggle='modal',
+                         data-target='#Task',
+                         data-id= '#{val.value._id}',
+                         data-task= '#{val.value.task}',
+                         data-description= '#{val.value.description}',
+                         data-deadlineDate= '#{val.value.deadlineDate}',
+                         data-deadlineTime= '#{val.value.deadlineTime}',
+                         data-user= '#{val.value.user}',
+                         data-project= '#{val.value.project}',
+                         data-unit= '#{val.value.unit}',
+                         data-estimated= '#{val.value.estimated}',
+                         data-spent= '#{val.value.spent}',
+                         data-created= '#{val.value.created}',
+                         data-creator= '#{val.value.creator}')
+
+                    .row
+                      .col-sm-2= val.value.project
+                      .col-sm-2= val.value.unit
+                      .col-sm-4= val.value.description
+                      .col-sm-4= val.value.user
+                    .progress
+                      span
+                      .progress-bar.progress-bar-warning(role='progressbar', aria-valuenow='72', aria-valuemin='0', aria-valuemax='100', style='width: 72%')
+                        span.sr-only 72% Complete
+                  hr
             a.anchor(name='closed')
             .panel.panel-default
               .div-panel-heading
