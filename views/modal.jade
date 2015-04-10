@@ -23,31 +23,30 @@ block  modal
               .col-sm-4
                 input.form-control(type='time', name='deadlineTime', required)
             br
+            label(for='priority') Priority
+            input.form-control(type='number', name='priority', required)
+            br
             label(for='user') Assign User
             select.form-control(name='user')
               option(selected disabled hidden value='' ) Select User
-              option(value='two') Two
-              option(value='three') Three
-              option(value='four') Four
-              option(value='five') Five
+              each val in users
+                option(value= '#{val.value.short}')= val.value.short
             br
             label(for='project') Project
             select.form-control(name='project')
               option(selected disabled hidden value='' ) Select Project
-              option(value='two') Two
-              option(value='three') Three
-              option(value='four') Four
-              option(value='five') Five
+              each val in projectNames
+                option(value= '#{val.value.projectName}')= val.value.projectName
             br
             label(for='unit') Unit
             select.form-control(name='unit')
               option(selected disabled hidden value='' ) Select Unit
-              option(value='two') Two
-              option(value='three') Three
-              option(value='four') Four
-              option(value='five') Five
+              each val in unitNames
+                option(value= '#{val.value.unitName}')= val.value.unitName
+            br
             label(for='estimated') estimated Hours
             input.form-control(type='number', name='estimated', required)
+            br
             label(for='spent') spented Hours
             input.form-control(type='number', name='spent')
             br
@@ -102,8 +101,11 @@ block  modal
             label(for='unitName') Unit Name
             input.form-control(type='text', name='unitName')
             br
-            label(for='projectName') Part of Project
-            input.form-control(type='text', name='projectName')
+            label(for='project') Part of Project
+            select.form-control(name='project')
+              option(selected disabled hidden value='' ) Select Project
+              each val in projectNames
+                option(value= '#{val.value.projectName}')= val.value.projectName
             br
             button.btn.btn-primary(type='submit', value='newUnit') Submit
         .modal-footer.well
@@ -115,5 +117,66 @@ block  modal
             span(aria-hidden='true') &times;
           h4#myModalLabel.modal-title Task
         .modal-body
+          form(action='/updateTask', method='post')
+            input.form-control(id='modalId',name='_id', type='hidden')
+            input.form-control(id='modalRev',name='_rev', type='hidden')
+            select.form-control(name='status')
+              option(id='modalStatus', selected hidden value='' )
+              option(value= 'open') open
+              option(value= 'closed') closed
+            br
+            label(for='task') Task
+            input.form-control(id='modalTask', type='text', name='task',required)
+            br
+            label(for='description') Description
+            textarea.form-control(id='modalDescription', type='text', name='description', required)
+            br
+            label(for='deadline') Deadline
+            .row(name='deadline')
+              .col-sm-4.col-sm-offset-2
+                input.form-control(id='modalDeadlinedate', type='date', name='deadlineDate', required)
+              .col-sm-4
+                input.form-control(id='modalDeadlinetime', type='time', name='deadlineTime', required)
+            br
+            label(for='priority') Priority
+            input.form-control(id='modalPriority', type='number', name='priority', required)
+            br
+            label(for='user') Assign User
+            select.form-control(name='user')
+              option(id='modalUser',selected hidden value='' )
+              each val in users
+                option(value= '#{val.value.short}')= val.value.short
+            br
+            label(for='project') Project
+            select.form-control(name='project')
+              option(id='modalProject', selected hidden value='' )
+              each val in projectNames
+                option(value= '#{val.value.projectName}')= val.value.projectName
+            br
+            label(for='unit') Unit
+            select.form-control(name='unit')
+              option(id='modalUnit', selected hidden value='' )
+              each val in unitNames
+                option(value= '#{val.value.unitName}')= val.value.unitName
+            br
+            label(for='estimated') estimated Hours
+            input.form-control(id='modalEstimated', type='number', name='estimated', required)
+            br
+            label(for='spent') spented Hours
+            input.form-control(id='modalSpent', type='number', name='spent')
+            br
+            label(for='created') Created
+            input.form-control(id='modalCreated', type='text', name='created',required, readonly='readonly')
+            br
+            label(for='creator') Creator
+            input.form-control(id='modalCreator', type='text', name='creator',required, readonly='readonly')
+            br
+            label(for='updated') Updated
+            input.form-control(id='modalUpdated', type='text', name='updated',required, readonly='readonly')
+            br
+            label(for='updater') Last Editor
+            input.form-control(id='modalUpdater', type='text', name='updater',required, readonly='readonly')
+            br
+            button.btn.btn-primary(type='submit', value='Update') Update
         .modal-footer.well
   block content

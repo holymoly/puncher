@@ -20,29 +20,44 @@ router.get('/*', function(req, res) {
 /* Create a new task in couchdb. */
 router.post('/newTask', function(req, res) {
   //create a new entry in database task
+  req.body['status'] = 'open';
+  req.body['created'] = new Date();
+  req.body['creator'] = 'not automated yet';
   createPost('tasks', req.body, res);
 });
 
 /* Create a new user in couchdb. */
 router.post('/newUser', function(req, res) {
+  req.body['created'] = new Date();
+  req.body['creator'] = 'not automated yet';
   createPost('users', req.body, res);
 });
 
 /* Create a new project in couchdb. */
 router.post('/newProject', function(req, res) {
+  req.body['created'] = new Date();
+  req.body['creator'] = 'not automated yet';
   createPost('projects', req.body, res);
 });
 
 /* Create a new unit in couchdb. */
 router.post('/newUnit', function(req, res) {
+  req.body['created'] = new Date();
+  req.body['creator'] = 'not automated yet';
   createPost('units', req.body, res);
 });
 
+
+router.post('/updateTask', function(req, res) {
+  console.log(req.body);
+  req.body['updated'] = new Date();
+  req.body['updater'] = 'nope';
+  createPost('tasks', req.body, res);
+});
+
 function createPost(database,data,res){
-  debug('create db entrryin database' + database);
+  debug('create db entrry in database' + database);
   //add creation data
-  data['created'] = new Date();
-  data['creator'] = 'not automated yet';
 
   couchClient.postDb(database,data,function(err,response,conflict){
     debug(err,response,conflict);
