@@ -28,7 +28,7 @@ block content
           // center
           .col-md-12
             .btn-group.btn-group-justified
-              a.btn.btn-primary.col-sm-3(type='button', data-toggle='modal', data-target='#newTask')
+              a.btn.btn-primary.col-sm-3(type='button', data-toggle='modal', data-target='#newTask', disabled=(projectNames.length > 0 && users.length > 0 ? false : true))
                 i.glyphicon.glyphicon-plus
                 br
                 strong
@@ -43,7 +43,7 @@ block content
                 br
                 strong
                 big Project
-              a.btn.btn-primary.col-sm-3(type='button', data-toggle='modal', data-target='#newUnit')
+              a.btn.btn-primary.col-sm-3(type='button', data-toggle='modal', data-target='#newUnit', disabled=(projectNames.length > 0 ? false : true))
                 i.glyphicon.glyphicon-plus
                 br
                 strong
@@ -61,22 +61,25 @@ block content
                     .col-sm-4 Assigned
               .panel-body
                 each val in tasks
-                  .click(type='button',
-                         data-toggle='modal',
-                         data-target='#Task',
-                         data-id= '#{val.value._id}',
-                         data-task= '#{val.value.task}',
-                         data-description= '#{val.value.description}',
-                         data-deadlineDate= '#{val.value.deadlineDate}',
-                         data-deadlineTime= '#{val.value.deadlineTime}',
-                         data-user= '#{val.value.user}',
-                         data-project= '#{val.value.project}',
-                         data-unit= '#{val.value.unit}',
-                         data-estimated= '#{val.value.estimated}',
-                         data-spent= '#{val.value.spent}',
-                         data-created= '#{val.value.created}',
-                         data-creator= '#{val.value.creator}')
+                  .click( type='button',
+                          data-toggle='modal',
+                          data-target='#Task',
 
+                          data-id= '#{val.value._id}',
+                          data-rev= '#{val.value._rev}',
+                          data-task= '#{val.value.task}',
+                          data-description= '#{val.value.description}',
+                          data-deadlineDate= '#{val.value.deadlineDate}',
+                          data-deadlineTime= '#{val.value.deadlineTime}',
+                          data-user= '#{val.value.user}',
+                          data-project= '#{val.value.project}',
+                          data-unit= '#{val.value.unit}',
+                          data-estimated= '#{val.value.estimated}',
+                          data-spent= '#{val.value.spent}',
+                          data-created= '#{val.value.created}',
+                          data-creator= '#{val.value.creator}',
+                          data-priority= '#{val.value.priority}',
+                          data-status= '#{val.value.status}')
                     .row
                       .col-sm-2= val.value.project
                       .col-sm-2= val.value.unit

@@ -43,6 +43,7 @@ function createPost(database,data,res){
   //add creation data
   data['created'] = new Date();
   data['creator'] = 'not automated yet';
+  data['status'] = 'open';
 
   couchClient.postDb(database,data,function(err,response,conflict){
     debug(err,response,conflict);
