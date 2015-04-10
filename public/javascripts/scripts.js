@@ -29,4 +29,6 @@ $('#Task').on('show.bs.modal', function (e) {
   document.getElementById('modalStatus').textContent = e.relatedTarget.dataset.status;
   document.getElementById('modalCreated').value = e.relatedTarget.dataset.created;
   document.getElementById('modalCreator').value = e.relatedTarget.dataset.creator;
+  document.getElementById('modalUpdated').value = e.relatedTarget.dataset.updated;
+  document.getElementById('modalUpdater').value = e.relatedTarget.dataset.updater;
 })

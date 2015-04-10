@@ -78,12 +78,14 @@ block content
                           data-spent= '#{val.value.spent}',
                           data-created= '#{val.value.created}',
                           data-creator= '#{val.value.creator}',
+                          data-updated= '#{val.value.updated}',
+                          data-updater= '#{val.value.updater}',
                           data-priority= '#{val.value.priority}',
                           data-status= '#{val.value.status}')
                     .row
                       .col-sm-2= val.value.project
                       .col-sm-2= val.value.unit
-                      .col-sm-4= val.value.description
+                      .col-sm-4= val.value.task
                       .col-sm-4= val.value.user
                     .progress
                       span
