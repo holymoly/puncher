@@ -40,17 +40,30 @@ function renderPage(postError, res) {
     }],
     function (err, results) {
       debug(err, postError, results);
+      //Sort by time
+      results[4].sort(function (b, a) {
+        // Turn your strings into dates, and then subtract them
+        // to get a value that is either negative, positive, or zero.
+        return new Date(b.value.deadlineTime) - new Date(a.value.deadlineTime);
+      });
+      //Sort by date
+      results[4].sort(function (b, a) {
+        // Turn your strings into dates, and then subtract them
+        // to get a value that is either negative, positive, or zero.
+        return new Date(b.value.deadlineDate) - new Date(a.value.deadlineDate);
+      });
       //getError = error duricg database request
       //postError = error during database insert
-      res.render('index', { title:        'puncher',
-                            projectNames: results[0],
-                            unitNames:    results[1],
-                            customers:    results[2],
-                            users:        results[3],
-                            tasks:        results[4],
-                            getError:     err,
-                            postError:    postError
-                          });
+      res.render('index', {
+        title:        'puncher',
+        projectNames: results[0],
+        unitNames:    results[1],
+        customers:    results[2],
+        users:        results[3],
+        tasks:        results[4],
+        getError:     err,
+        postError:    postError
+      });
     });
 }
 
