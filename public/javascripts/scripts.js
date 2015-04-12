@@ -1,10 +1,11 @@
 
-$(document).ready(function(){$(".alert").addClass("in").fadeOut(4500);
+$(document).ready(function () {
+  $(".alert").addClass("in").fadeOut(4500);
 
   /* swap open/close side menu icons */
-  $('[data-toggle=collapse]').click(function(){
+  $('[data-toggle=collapse]').click(function () {
     // toggle icon
-  	$(this).find("i").toggleClass("glyphicon-chevron-right glyphicon-chevron-down");
+    $(this).find("i").toggleClass("glyphicon-chevron-right glyphicon-chevron-down");
   });
 });
 
@@ -31,4 +32,4 @@ $('#Task').on('show.bs.modal', function (e) {
   document.getElementById('modalCreator').value = e.relatedTarget.dataset.creator;
   document.getElementById('modalUpdated').value = e.relatedTarget.dataset.updated;
   document.getElementById('modalUpdater').value = e.relatedTarget.dataset.updater;
-})
+});
