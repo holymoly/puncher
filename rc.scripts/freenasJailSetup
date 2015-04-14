@@ -29,8 +29,9 @@ chsh -s zsh
 cp -R /tmp/dotfiles/.z* /root/
 chsh -s zsh $input_user
 cp -R /tmp/dotfiles/.z* /usr/home/$input_user
-pkg install www/npm
 pkg install www/iojs
+pkg install www/npm
+
 pkg install databases/couchdb
 
 echo 'couchdb_enable="YES"
@@ -58,7 +59,9 @@ cp /www/puncher/rc.scripts/puncher.json /www/config/
 
 echo 'puncher_enable="YES"' >> /etc/rc.conf
 
-service start puncher
+service puncher start
+echo "*****************************************"
+echo "Set the couchdb IP in /www/puncher/config.js"
 
 #export python=/usr/local/bin/python2
 #pkg instal devel/gmake
