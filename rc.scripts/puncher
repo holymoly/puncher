@@ -1,0 +1,60 @@
+#!/bin/sh
+
+# PROVIDE: webftp
+# REQUIRE: NETWORKING SERVERS DAEMON
+# BEFORE:  LOGIN
+# KEYWORD: shutdown
+
+. /etc/rc.subr
+
+name="puncher"
+appconf="/www/config/puncher.json"
+
+rcvar=`set_rcvar`
+
+start_cmd="start"
+stop_cmd="stop"
+restart_cmd="restart"
+status_cmd="status"
+
+load_rc_config $name
+eval "${rcvar}=\${${rcvar}:-'NO'}"
+
+start()
+{
+  USER=root
+  PATH=/sbin:/bin:/usr/sbin:/usr/bin:/usr/local/sbin:/usr/local/bin:/root/bin
+  PWD=/root
+  HOME=/root
+  NODE_ENV=production
+  pm2 start ${appconf}
+}
+
+stop()
+{
+  USER=root
+  PATH=/sbin:/bin:/usr/sbin:/usr/bin:/usr/local/sbin:/usr/local/bin:/root/bin
+  PWD=/root
+  HOME=/root
+  pm2 stop ${name}
+}
+
+restart()
+{
+  USER=root
+  PATH=/sbin:/bin:/usr/sbin:/usr/bin:/usr/local/sbin:/usr/local/bin:/root/bin
+  PWD=/root
+  HOME=/root
+  pm2 restart ${name}
+}
+
+status()
+{
+  USER=root
+  PATH=/sbin:/bin:/usr/sbin:/usr/bin:/usr/local/sbin:/usr/local/bin:/root/bin
+  PWD=/root
+  HOME=/root
+  pm2 status ${name}
+}
+
+run_rc_command "$1"

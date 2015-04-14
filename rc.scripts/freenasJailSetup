@@ -1,0 +1,65 @@
+#!/bin/sh
+
+#check if user is root
+if [ "$(id -u)" != "0" ]; then
+   echo "This script must be run as root" 1>&2
+   exit 1
+fi
+
+echo "Enter local ip adress for couchdb config:"
+read input_variable
+echo "Set couchdb bind_adress to: $input_variable"
+
+echo "Enter username to add: "
+read input_user
+echo "User to Add: $input_user"
+
+pw useradd -n $input_user -s /bin/sh -m -G wheel
+passwd $input_user
+/usr/bin/sed -i '' 's/sshd_enable="NO"/sshd_enable="YES"/g' /etc/rc.conf
+service sshd start
+pkg upgrade
+pkg install shells/zsh
+cd /tmp
+git clone https://github.com/hukl/dotfiles
+cd dotfiles
+git submodule init
+git submodule update
+chsh -s zsh
+cp -R /tmp/dotfiles/.z* /root/
+chsh -s zsh $input_user
+cp -R /tmp/dotfiles/.z* /usr/home/$input_user
+pkg install www/npm
+pkg install www/iojs
+pkg install databases/couchdb
+
+echo 'couchdb_enable="YES"
+couchdb_enablelogs="YES"
+couchdb_user="couchdb"' >> /etc/rc.conf
+
+/usr/bin/sed -i '' 's/;bind_address = 127.0.0.1/bind_address = '"$input_variable"'/g'  /usr/local/etc/couchdb/local.ini
+chown -R /var/log/couchdb/
+service couchdb restart
+
+pkg install sysutils/tmux
+
+npm install pm2 -g
+mkdir /www
+cd /www
+mkdir config
+mkdir logs
+git clone https://github.com/holymoly/puncher
+cd puncher
+npm install
+cp /www/puncher/rc.scripts/config.js /www/puncher/
+cp /www/puncher/rc.scripts/puncher /etc/rc.d/
+chmod 555 /etc/rc.d/puncher
+cp /www/puncher/rc.scripts/puncher.json /www/config/
+
+echo 'puncher_enable="YES"' >> /etc/rc.conf
+
+service start puncher
+
+#export python=/usr/local/bin/python2
+#pkg instal devel/gmake
+#curl https://raw.githubusercontent.com/creationix/nvm/v0.24.0/install.sh | zsh
