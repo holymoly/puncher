@@ -1,0 +1,16 @@
+[{
+  "name"             : "puncher",
+  "cwd"              : "/www/puncher",
+  "args"             : "",
+  "script"           : "bin/www",
+  "node_args"        : "",
+  "log_date_format"  : "YYYY-MM-DD HH:mm Z",
+  "error_file"       : "/www/logs/STDERR.log",
+  "out_file"         : "/www/logs/STDOUT.log",
+  "instances"        : "1", //or 'max'
+  "min_uptime"       : "200", // milliseconds, defaults to 1000
+  "max_restarts"     : "10", // defaults to 15
+  "merge_logs"       : true,
+  "exec_interpreter" : "node",
+  "exec_mode"        : "fork_mode",
+}]
